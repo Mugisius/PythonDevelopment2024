@@ -8,6 +8,8 @@ parser.add_argument('-e', default=cowsay.Option.eyes, type=str)
 parser.add_argument("-f", dest="file", action="store", default="default", type=str)
 parser.add_argument("-l", action="store_true")
 parser.add_argument("-n", action="store_false")
+parser.add_argument("-T", type=str, default=cowsay.Option.tongue)
+parser.add_argument("-W", type=int, default=40)
 args = parser.parse_args()
 
 if args.l:
@@ -24,4 +26,11 @@ if args.message:
 else:
     message = "".join(sys.stdin.readlines())
 
-print(cowsay.cowsay(message,eyes=args.e[:2],cow=args.file,wrap_text=args.n))
+print(cowsay.cowsay(
+        message, 
+        eyes=args.e[:2], 
+        cow=args.file,
+        wrap_text=args.n, 
+        tongue=args.T[:2], 
+        width=(args.W-1)
+        ))
