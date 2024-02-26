@@ -6,7 +6,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument("message", nargs="*", type=str)
 parser.add_argument('-e', default=cowsay.Option.eyes, type=str)
 parser.add_argument("-f", dest="file", action="store", default="default", type=str)
+parser.add_argument("-l", action="store_true")
 args = parser.parse_args()
+
+if args.l:
+    print("Cow files:")
+    print(" ".join(sorted(cowsay.list_cows())))
+    exit(0)
 
 if args.message:
     message = [w for arg in args.message for w in arg.split(" ") if w]
